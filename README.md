@@ -353,7 +353,6 @@ Run this to update Blueprint and your installed skills to the latest version.
 
 ## Example
 
-The `examples/` folder contains sample Blueprint artifacts.
+The `core` folder contains sample Blueprint artifacts associate with a GTM .
 
-- `dispatch-control-plane/design.md` -- design doc for Dispatch's local agent control-plane architecture
-- `input.md` -> `spec.md` -> `plan.md` -- example flow for a Python RAG chatbot API
+- 

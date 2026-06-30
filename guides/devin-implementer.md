@@ -41,7 +41,7 @@ time, using a coordinator workflow.
 
 Repository:
 - Local path: <absolute-path>
-- GitHub repo: meetarrivexyz/getarrive
+- GitHub repo: versusjl/devin-blueprint
 - Remote: <remote-url>
 - Base branch: main
 
