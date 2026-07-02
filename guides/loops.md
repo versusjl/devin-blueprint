@@ -2,8 +2,6 @@
 
 Blueprint's skills run attended by default: you invoke them, they pause at human checkpoints. This guide shows how to run them unattended, as scheduled loops over Linear. You write ideas down, agents turn them into specs and draft PRs, and your involvement narrows to two gates: approving specs and reviewing PRs.
 
-Use `goal-design` when a delegated Codex or Claude Code session needs a finish line, verifier, evidence, or stop rule. Devin does not need `goal-design` -- it handles goal-setting natively.
-
 The runtime loop layer is deliberately prompts and external state, not a bespoke runner. Skills encode judgment that must stay consistent everywhere; the loop layer is wiring between skills for one workflow, and it gets pasted into whatever runs it: a Devin Automation, a GitHub Action, a Claude Code schedule, a Codex automation, or cron. Adjust the prompts to your repo.
 
 ## The Three Phases
@@ -215,7 +213,7 @@ jobs:
             <paste the work loop prompt>
 ```
 
-**Codex**: paste the prompt into an automation in the Automations tab. For an attended Codex coordinator that owns a finite issue set and may merge only when explicitly authorized, use [codex-coordinator.md](codex-coordinator.md).
+**Codex**: paste the prompt into an automation in the Automations tab. For an attended Codex coordinator that owns a finite issue set and may merge only when explicitly authorized, use [codex-implementer.md](codex-implementer.md).
 
 Start with one loop, the work loop, on a slow schedule. Add the spec and review loops once you trust its output.
 

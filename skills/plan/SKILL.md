@@ -51,7 +51,7 @@ After the plan is reviewed, Devin routes the tasks:
 - **Devin direct** -- ambiguous, high-risk, or context-heavy tasks that require senior judgment
 - **Claude / Codex** -- structurally clear implementation tasks that can be delegated via automations or CLI
 - **Local models** -- lightweight, private, or cost-sensitive tasks in Devin local
-- **Parallel lanes** -- independent tasks that can run simultaneously through `multitask`
+- **Parallel lanes** -- independent tasks that can run simultaneously through a coordinator loop (see `guides/loops.md`)
 
 Devin does not start execution until the plan is confirmed. If tasks go to Linear, Devin creates the issues and assigns them to the appropriate agent.
 

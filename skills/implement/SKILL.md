@@ -2,7 +2,7 @@
 name: implement
 description: "Make one focused code change: understand the task, make the smallest complete change, test it, verify it, and report."
 user-invocable: true
-argument-hint: "<task reference or description> e.g. 'ARL-123' or 'Task 2 from user-auth'"
+argument-hint: "<task reference or description> e.g. 'ABC-123' or 'Task 2 from user-auth'"
 ---
 
 # Implement

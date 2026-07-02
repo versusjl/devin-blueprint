@@ -4,23 +4,22 @@
 > Claude) hands to **any worker** — a Codex app thread, a Claude session or
 > headless run, or a Devin child session — to take one Linear issue to a PR.
 > Keep it tight and fill in every placeholder. Cross-reference
-> [`task-intake-template.md`](./task-intake-template.md) and
-> [`child-session-handoff-template.md`](./child-session-handoff-template.md)
-> instead of duplicating them.
+> [`child-session-handoff.md`](./child-session-handoff.md) instead of
+> duplicating it.
 
 ```text
-Read AGENTS.md, CLAUDE.md, and docs/agent-system/operating-model.md first.
+Read AGENTS.md and CLAUDE.md first.
 
-You are the worker for this single Arrive issue.
+You are the worker for this single issue.
 
 Repo:
 - Local path: <absolute-path>
-- GitHub repo: versusjl/devin-blueprint
+- GitHub repo: <owner>/<repo>
 - Base branch: main
 
 Linear issue:
-- ARL-<n>: <issue title>
-- Team key: ARL
+- <TEAM>-<n>: <issue title>
+- Team key: <TEAM>
 - Lane: <one lane only>
 - Allowed files: <glob(s) inside the lane — nothing outside>
 - Explicit non-goals: <what this task must not touch>
@@ -29,7 +28,7 @@ Goal:
 <one paragraph — the observable outcome this issue delivers>
 
 Branch:
-- Create ARL-<n>-<lane>-<slug> from main
+- Create <TEAM>-<n>-<lane>-<slug> from main
 
 Work rules:
 - Make the smallest complete change.
@@ -38,28 +37,25 @@ Work rules:
 - Keep docs in sync only if the behavior, command, or public API changed.
 
 Verification:
-- npm run type-check
+- <type-check command>
 - <targeted test command>
-- <relevant lint command, e.g. npm run lint:xmtp-boundary>
+- <relevant lint command>
 
-Arrive non-negotiables:
-- No autonomous user-affecting action; draft/recommendation only.
-- No user-facing vendor or infrastructure names.
-- Convex auth/admin gates preserved.
-- Bilateral messages stay XMTP-only, never Convex.
-- Web app writes go to Convex, not new browser libSQL paths.
+Project non-negotiables:
+- <the hard rules from AGENTS.md this issue could plausibly violate —
+  auth gates, data-boundary rules, size gates, vendor-naming rules>
 - PR stays within the size gate, or the issue explicitly says it is
   size-justified.
 
 PR and routing:
-- Open the PR with body: Closes ARL-<n>
+- Open the PR with body: Closes <TEAM>-<n>
 - Tag the opposite reviewer on the PR
 - Apply the matching review label: review:claude or review:codex
 - Set Linear review routing to the opposite reviewer
 - NEVER merge
 
 Completion:
-- Post the handoff using docs/agent-system/child-session-handoff-template.md
+- Post the handoff using guides/child-session-handoff.md
 - Do exactly this one issue, then stop
 - If blocked, comment on the issue, move it back to Ready for Agent, and stop
 

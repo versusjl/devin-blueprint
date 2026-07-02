@@ -6,7 +6,7 @@ Read [AGENTS.md](AGENTS.md) first. This file contains Claude Code-specific adapt
 
 Blueprint workflows live in `skills/<name>/SKILL.md`. Invoke as:
 
-`/blueprint:design-doc`, `/blueprint:spec`, `/blueprint:plan`, `/blueprint:implement`, `/blueprint:tdd`, `/blueprint:refactor`, `/blueprint:review`, `/blueprint:browser-verify`, `/blueprint:branch`, `/blueprint:commit`
+`/blueprint:design-doc`, `/blueprint:spec`, `/blueprint:plan`, `/blueprint:implement`, `/blueprint:tdd`, `/blueprint:refactor`, `/blueprint:review`, `/blueprint:browser-verify`, `/blueprint:branch`, `/blueprint:commit`, `/blueprint:pr`
 
 `browser-verify` requires Chrome DevTools MCP.
 

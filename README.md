@@ -84,7 +84,7 @@ flowchart TD
 
     Count{How many tickets?}
     Single["task-to-pr\nbranch, implement,\nreview, verify, PR"]
-    Multi["multitask\nclassify, isolate,\ncoordinate workers"]
+    Multi["coordinator loop\nclassify, isolate,\ncoordinate workers"]
     PRs["draft PRs\ntests, review,\nacceptance evidence"]
     Ready["pr-to-ready\nfeedback to merge-ready,\nnever merge automatically"]
 
@@ -139,7 +139,7 @@ Blueprint organizes the software development lifecycle into a repeatable enginee
 | Debug | `debug` | Reproduce failures, fix them test-first when practical, and keep the guardrails intact. |
 | Improve | `refactor` | Simplify changed code without changing behavior. Enforce 300 LOC file limit. |
 | Review | `review` | Check correctness, security, simplicity, and merge readiness. |
-| Deliver | `task-to-pr` / `multitask` | Turn one ticket or several tickets into draft PRs. |
+| Deliver | `task-to-pr` | Turn a ticket into a draft PR; for several tickets, run one coordinator loop (see [guides/loops.md](guides/loops.md)). |
 | Feedback | `pr-to-ready` | Drive an open PR from human, bot, or check feedback to merge-ready. |
 
 ---
@@ -163,7 +163,6 @@ These are the skills Devin uses directly. Devin has native browser, screenshot, 
 | `refactor` | Simplify changed code without changing behavior. Enforce 300 LOC file limit. |
 | `review` | Pre-merge review for correctness, security, simplicity, robustness, and tests. |
 | `task-to-pr` | Run the full loop from Linear ticket to draft PR with verification and evidence. |
-| `multitask` | Coordinate several tickets to draft PRs in parallel. |
 | `pr-to-ready` | Drive an open PR from feedback to merge-ready. Never merges. |
 
 ### Claude Code / Codex (delegated agent skills)
@@ -177,14 +176,13 @@ These skills give Claude Code and Codex the explicit instructions they need to e
 | `commit` | Stage intended changes and write one clear Conventional Commit. |
 | `pr` | Commit, push, and open a clear draft PR. |
 | `tdd` | Test-first variant of implement for enforcing test-first discipline. |
-| `goal-design` | Write `/goal` prompts for Codex and Claude Code sessions with checks, evidence, and stop rules. |
 | `test-before-pr` | Project-specific pre-PR verification (per-repo, not part of Blueprint core). |
 
 #### Claude Code invocation
 
 Blueprint workflows live in `skills/<name>/SKILL.md`. Invoke as:
 
-`/blueprint:design-doc`, `/blueprint:spec`, `/blueprint:plan`, `/blueprint:implement`, `/blueprint:tdd`, `/blueprint:refactor`, `/blueprint:review`, `/blueprint:browser-verify`, `/blueprint:branch`, `/blueprint:commit`
+`/blueprint:design-doc`, `/blueprint:spec`, `/blueprint:plan`, `/blueprint:implement`, `/blueprint:tdd`, `/blueprint:refactor`, `/blueprint:review`, `/blueprint:browser-verify`, `/blueprint:branch`, `/blueprint:commit`, `/blueprint:pr`
 
 `browser-verify` requires Chrome DevTools MCP. See [CLAUDE.md](CLAUDE.md) for Claude-specific adapter notes.
 
@@ -257,17 +255,17 @@ The Orchestrator Loop writes labels and charters. The Control Plane tracks state
 
 The skills above are the building blocks. The loops connect them into end-to-end execution with clear checkpoints.
 
-| Skill | From | To |
+| Loop | From | To |
 | --- | --- | --- |
 | `task-to-pr` | a ticket | a draft PR with code, tests, fresh sub-agent review, acceptance verification, and evidence |
-| `multitask` | several tickets | several draft PRs, one isolated worker lane per ticket or dependency group |
+| coordinator loop | several tickets | several draft PRs, one isolated worker lane per ticket or dependency group |
 | `pr-to-ready` | an open PR with human, bot, or check feedback | a merge-ready PR with checks passing |
 
 The loops keep the ticket current as they work: status changes, verification evidence is added, and PR links are recorded back on the ticket. They stop at human checkpoints. Merging is always a human decision.
 
 `task-to-pr` is the single-ticket loop. It resolves the ticket, creates a branch, implements the acceptance criteria, reviews the diff, verifies the result, opens a draft PR, and writes evidence back to the ticket.
 
-`multitask` is the coordinator-worker loop for multiple tickets at once. It classifies the work, isolates dependencies, launches one worker lane per ticket or ticket group, and returns several draft PRs with evidence. Each worker runs the full `task-to-pr` workflow. The coordinator does not edit code; it partitions work, starts isolated lanes, monitors failures, and reports the fleet.
+The coordinator loop is the pattern for multiple tickets at once: it classifies the work, isolates dependencies, launches one worker lane per ticket or ticket group, and returns several draft PRs with evidence. Each worker runs the full `task-to-pr` workflow. The coordinator does not edit code; it partitions work, starts isolated lanes, monitors failures, and reports the fleet. It is a prompt pattern, not a skill -- see [guides/loops.md](guides/loops.md) and the per-agent coordinator guides ([Devin](guides/devin-implementer.md), [Claude Code](guides/claude-implementer.md), [Codex](guides/codex-implementer.md)).
 
 `pr-to-ready` is the feedback loop for an open PR. It takes human feedback, bot feedback, or check failures, resolves what is needed, and drives the PR to merge-ready status without merging automatically.
 
@@ -348,11 +346,3 @@ npx skills update
 ```
 
 Run this to update Blueprint and your installed skills to the latest version.
-
----
-
-## Example
-
-The `core` folder contains sample Blueprint artifacts associate with a GTM .
-
-- 

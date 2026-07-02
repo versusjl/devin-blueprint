@@ -40,9 +40,9 @@ After writing, print:
 ```text
 Charter written to charters/<project-slug>.md
 Review and reply "approve" to proceed, "edit" to revise, or leave feedback.
+```
 
 Then stop. Do not start specs, plans, or implementation until the human approves the charter.
-```
 
 ## Rules
 Charters are living documents. Update them as you learn -- but never create or overwrite without approval.

@@ -89,7 +89,7 @@ Errors are learning opportunities. When something breaks:
 - `intermediates/` -- temporary files, logs, and other files that are not meant to be accessed by the user.
 - `knowledge/` -- canonical in repo; copied to Devin. Standing notes with semantic triggers.
 - `playbooks/` -- canonical in repo; copied to Devin. Reusable task procedures, fired by !macro, versioned with rollback.
-- `skills/` -- SKILL.md files at `.agents/skills/<name>/SKILL.md`. See [README.md](README.md) for the full skill list and agent routing.
+- `skills/` -- SKILL.md files at `skills/<name>/SKILL.md`. See [README.md](README.md) for the full skill list and agent routing.
 
 **Key Principles:** Local files are only for processing. Deliverables live in cloud-based services (Google Sheets, Google Slides, etc.) where the user can access them. Everything in `.tmp/` is temporary, can be deleted at any time, and should be regenerated. No source file should exceed 300 lines of code.
 
@@ -116,7 +116,7 @@ Errors are learning opportunities. When something breaks:
 - Key playbooks: `!delegate` (route work to the fleet), `!knowledge-update` (persist learnings).
 
 **Skills**
-- SKILL.md files committed to the repo at `.agents/skills/<name>/SKILL.md` (open Agent Skills standard, portable across tools).
+- SKILL.md files committed to the repo at `skills/<name>/SKILL.md` (open Agent Skills standard, portable across tools).
 - Frontmatter controls behavior: description, argument-hint, triggers, allowed-tools (e.g. read-only for investigations).
 - Devin auto-suggests skills after it learns our setup (accept via "Create PR"). Use for test-before-PR, deploy, codebase investigation.
 - Skills are split by agent: Devin core skills vs Claude Code/Codex delegated skills. See [README.md](README.md) for the full routing table.
@@ -186,7 +186,7 @@ Errors are learning opportunities. When something breaks:
 1. Add `AGENTS.md` to each repo root.
 2. Seed Knowledge in `knowledge/` (conventions, recurring bugs, deploy/test workflows); copy into Devin, organize in folders.
 3. Author core Playbooks in `playbooks/` (`!delegate`, `!knowledge-update`, plus task-specific macros); copy into Devin.
-4. Commit Skills (`.agents/skills/`) for test/deploy/investigate procedures.
+4. Commit Skills (`skills/`) for test/deploy/investigate procedures.
 5. Connect MCP servers (Linear, GitHub, observability).
 6. Copy `.env` variables into Devin's secret store.
 7. Set Automations: `retro` (post-session), Auto-triage (Slack), and pull-based dispatch (Linear).

@@ -36,7 +36,7 @@ For each request, determine:
 - **Risk**: low, medium, high. High = touches contracts, schemas, auth, payments, migrations, or production.
 - **Scope**: small (one file, one function), medium (multiple files, one system), large (multiple systems, cross-cutting).
 - **Ambiguity**: clear (can start immediately), partial (need one clarification), ambiguous (needs design-doc or spec first).
-- **Agent routing**: Devin direct, delegate to Claude/Codex, or split via multitask.
+- **Agent routing**: Devin direct, delegate to Claude/Codex, or split via `plan` and a coordinator loop.
 
 ### 4. Route
 
@@ -54,7 +54,7 @@ Based on the classification, recommend the next step:
 | incident | any | `debug` (with urgency flag) |
 | infrastructure | clear | `implement` |
 | infrastructure | ambiguous | `spec` then `implement` |
-| coordination | any | `plan` then `multitask` |
+| coordination | any | `plan`, then a coordinator loop (see `guides/loops.md`) |
 
 ### 5. Report
 

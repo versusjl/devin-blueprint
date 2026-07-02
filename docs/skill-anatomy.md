@@ -6,7 +6,7 @@ Blueprint skills are workflows, not reference material. A skill should tell an a
 
 Skills should be as short as they can be while remaining clear. The test for every line is: would removing this change agent behavior? If no, cut it.
 
-Use `compress` whenever a skill starts to feel bloated. Compression preserves behavior, constraints, exact names, paths, commands, schemas, and examples that carry meaning.
+Compress a skill whenever it starts to feel bloated. Compression preserves behavior, constraints, exact names, paths, commands, schemas, and examples that carry meaning.
 
 ## Frontmatter
 

@@ -1,26 +1,25 @@
-
 # Claude Code Coordinator Loop
 
-> **Read first:** [`AGENTS.md`](../../AGENTS.md), [`CLAUDE.md`](../../CLAUDE.md), and [`operating-model.md`](./operating-model.md). This file does **not** restate the shared rules — it only describes how **Claude Code** runs the coordinator role. The shared rules win on any conflict.
+> **Read first:** [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md),
+> [`loops.md`](./loops.md), and [`labels.md`](./labels.md). This file does
+> **not** restate the shared rules — it only describes how **Claude Code**
+> runs the coordinator role. The shared rules win on any conflict.
 
 The coordinator is **whoever starts the work**. When you open a Claude Code
 run and tell it to work through a set of issues, Claude Code is the coordinator
 for that run. This guide is how Claude Code fills that role using its own
 sessions, scheduled triggers, and headless `claude -p` runs. Workers are pulled
-from [`worker-prompts.md`](./worker-prompts.md); the lanes, four-gate review,
-and `ARL` sync are the shared ones from `operating-model.md`.
+from [`worker-prompts.md`](./worker-prompts.md); the lanes, review gates, and
+Linear sync are the shared ones from `loops.md` and `labels.md`.
 
 Use this when you want Claude Code to coordinate a bounded issue set, dispatch
 lane-disjoint work to workers, and keep Claude focused on orchestration and
-review rather than routine implementation. This matches
-[`autonomous-loops.md`](./autonomous-loops.md) Options 2/4 and
-[`claude-web-overnight-loop.md`](./claude-web-overnight-loop.md) without
-repeating them.
+review rather than routine implementation.
 
 This loop is useful when:
 
 - the issue set is finite and ordered;
-- Linear should stay current (team key `ARL`);
+- Linear should stay current;
 - each issue should become its own branch and PR;
 - Claude should coordinate through its own sessions or headless runs;
 - Claude should hand each worker the packet from `worker-prompts.md`;
@@ -40,13 +39,13 @@ time, using a coordinator workflow.
 
 Repository:
 - Local path: <absolute-path>
-- GitHub repo: versusjl/devin-blueprint
+- GitHub repo: <owner>/<repo>
 - Remote: <remote-url>
 - Base branch: main
 
 Source of truth:
-- The listed Linear issues (team key ARL)
-- AGENTS.md, CLAUDE.md, and docs/agent-system/operating-model.md
+- The listed Linear issues (team key <TEAM>)
+- AGENTS.md and CLAUDE.md
 - Any linked PRD or plan doc
 - The Linear board (states below)
 
@@ -57,14 +56,14 @@ Claude coordinator policy:
 - Before creating a worker, pull the issue, inspect the repo state, and write a
   short plan if the task is non-trivial.
 - For each active issue, spawn a fresh worker session with the self-contained
-  packet from docs/agent-system/worker-prompts.md, filled in with the issue,
+  packet from guides/worker-prompts.md, filled in with the issue,
   repo context, branch name, acceptance criteria, verification steps, Linear
   rules, PR expectations, and reporting requirements.
 - Use lane-disjoint issues only.
 - Keep Claude focused on orchestration, review, and integration — not routine
   implementation.
 
-Linear tracking (team key ARL):
+Linear tracking (team key <TEAM>):
 - Move an issue to In Progress when active work starts.
 - Keep it In Progress through planning, coding, review, PR, and checks.
 - Move it to In Review when the PR is open; on merge the magic word auto-moves
@@ -84,16 +83,16 @@ Workflow for each issue:
 
 2. Plan the work.
 - For simple issues, write a short plan in the coordinator thread.
-- For non-trivial issues, write a plan under docs/issues/ARL-<n>-plan.md.
+- For non-trivial issues, write a plan under docs/issues/<TEAM>-<n>-plan.md.
 - Include goal, context, likely files, acceptance criteria, verification, and
   out of scope.
 
 3. Spawn a worker session and isolate.
 - Create a separate worker session per issue.
 - Prefer a worktree starting from main for each worker.
-- One branch per issue. Branch naming: ARL-<n>-<lane>-<slug>.
+- One branch per issue. Branch naming: <TEAM>-<n>-<lane>-<slug>.
 - Stay inside one lane. Do not stage unrelated changes.
-- Hand the worker the filled packet from docs/agent-system/worker-prompts.md.
+- Hand the worker the filled packet from guides/worker-prompts.md.
 
 4. Implement.
 - The worker makes the smallest complete change that satisfies the issue.
@@ -102,8 +101,8 @@ Workflow for each issue:
 
 5. Verify.
 - Run the issue's listed verification commands and the relevant test suite.
-- Run npm run type-check. For user-visible or terminal behavior, run the manual
-  smoke checks.
+- Run the project's type-check. For user-visible or terminal behavior, run the
+  manual smoke checks.
 - Record anything that could not be verified.
 
 6. Adversarial review.
@@ -113,7 +112,7 @@ Workflow for each issue:
   rules.
 
 7. Open the PR.
-- Open a PR with body `Closes ARL-<n>`.
+- Open a PR with body `Closes <TEAM>-<n>`.
 - Tag the opposite reviewer, apply the matching review label, and set Linear
   review routing.
 - Do not merge.

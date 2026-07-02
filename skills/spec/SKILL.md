@@ -46,10 +46,12 @@ After writing, print:
 ```text
 Spec written to docs/<feature-slug>/spec.md
 Review and reply "approve" to proceed, "edit" to revise, or leave feedback.
+```
+
 Then stop. Do not plan, implement, or run further tools until the human responds.
 
 If the spec is linked to a Linear ticket, update the ticket with a link to the spec.
-``` 
+
 ## Rules
 - Smallest safe change that fully solves the problem.
 - If two implementations would behave differently, specify the default.

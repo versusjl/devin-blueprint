@@ -1,5 +1,10 @@
 # AI Model & Platform Matrix — June 30, 2026
 
+> Benchmark figures are compiled from vendor announcements and public
+> leaderboards as of the date above, not independently verified. Treat them as
+> directional, verify before relying on any single number, and re-check
+> quarterly — the model landscape moves fast.
+
 ## Your Subscriptions
 
 | Platform | What It Is | Current Flagship Model(s) |
@@ -64,7 +69,7 @@
 | **Key strength** | Highest proven coding reliability + MCP tool use | Best cost/performance ratio in the industry | Fastest, cheapest near-frontier model |
 | **Knowledge cutoff** | Jan 2026 | Aug 2025 | Feb 2025 |
 
-**Note:** Claude Fable 5 (the Mythos-class model above Opus) was briefly available in June 2026 but has been suspended by US government directive. Not currently accessible.
+**Note:** Claude Fable 5 (the Mythos-class tier above Opus) launched in June 2026 and is generally available; Claude Mythos 5 shares the same underlying model and is limited to approved organizations. Not yet reflected in the matrix above — re-evaluate the Claude rows once benchmarks land.
 
 ### GLM (Zhipu AI / Z.ai)
 
@@ -175,7 +180,7 @@ Is this a SOFTWARE ENGINEERING task?
 
 ---
 
-## Recommended Default Stack for Arrive
+## Recommended Default Stack
 
 | Workflow | Tool | Rationale |
 |----------|------|-----------|

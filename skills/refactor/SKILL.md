@@ -64,7 +64,7 @@ Look for changes that would make the code easier to understand, maintain, or saf
 
 - the refactor is mechanical (rename, extract a well-bounded function, move a file)
 - the pattern is clear and repeatable across many files
-- the work can be parallelized across agents via `multitask`
+- the work can be parallelized across agents via a coordinator loop
 
 Devin still reviews delegated refactors before they move forward.
 
